@@ -2,4 +2,4 @@
 aptPkg = ['libgl1', 'ffmpeg', 'libsm6', 'libxext6']
 
 [start]
-cmd = "gunicorn --bind 0.0.0.0:$PORT server:app --forwarded-allow-ips='*'"
+cmd = "gunicorn --bind 0.0.0.0:$PORT main:app --forwarded-allow-ips='*'"
