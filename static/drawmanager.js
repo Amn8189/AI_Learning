@@ -104,9 +104,11 @@ let clearButton = document.getElementById("clearButton");
 clearButton.addEventListener("click", clearCanvas);
 
 function sendData() {
+    let results = document.getElementById("results")
+    results.innerHTML = '<div class="loader mt-3"></div>'
     console.log("***")
     console.log(allPositions)
-    fetch("https://ailearning-production.up.railway.app/mnist_playground", {
+    fetch("/mnist_playground", {
         method : "POST",
         body : JSON.stringify(allPositions),
         headers : {"Content-type":"application/json; charset=UTF-8"}
