@@ -104,11 +104,9 @@ let clearButton = document.getElementById("clearButton");
 clearButton.addEventListener("click", clearCanvas);
 
 function sendData() {
-    let results = document.getElementById("results")
-    results.innerHTML = '<div class="loader mt-3"></div>'
     console.log("***")
     console.log(allPositions)
-    fetch("/mnist_playground", {
+    fetch("https://web-production-8cbdf.up.railway.app/mnist_playground", {
         method : "POST",
         body : JSON.stringify(allPositions),
         headers : {"Content-type":"application/json; charset=UTF-8"}
@@ -122,132 +120,27 @@ function clearCanvas(){
 }
 
 function showResultAsHtml(data){
-    // TODO
     let div = document.getElementById("results");
-    div.innerHTML = `
-        <div class="d-flex flex-row align-items-center">
-            <p>0</p>
-            <span style="width: 200px; height:10px; background-color:grey;">
+    div.innerHTML = ""
+        for (let i=0; i<10; i++){
+    div.innerHTML+= `
+        <div class="d-flex flex-row align-items-center mb-2">
+            <p class="me-3 fw-bold" style="min-width: 25px; color:white;">${i}</p>
+            <span style="width: 200px; height: 12px; background-color: rgba(255, 255, 255, 0.1); border-radius: 6px; overflow: hidden;">
                 <div
-                    style="width:${Math.round(data[0])}%;
-                    height: 10px;
-                    background-color: blue;"
+                    style="width:${Math.round(data[i])}%;
+                    height: 12px;
+                    background: linear-gradient(90deg, #6366F1, #3B82F6);
+                    color:white;
+                    transition: width 0.3s ease;"
                     >
                 </div>
             </span>
-            <p>${Math.round(data[0])} %</p>
-        </div>
-        <div class="d-flex flex-row align-items-center">
-            <p>1</p>
-            <span style="width: 200px; height:10px; background-color:grey;">
-                <div
-                    style="width:${Math.round(data[1])}%;
-                    height: 10px;
-                    background-color: blue;"
-                    >
-                </div>
-            </span>
-            <p>${Math.round(data[1])} %</p>
-        </div>
-        <div class="d-flex flex-row align-items-center">
-            <p>2</p>
-            <span style="width: 200px; height:10px; background-color:grey;">
-                <div
-                    style="width:${Math.round(data[2])}%;
-                    height: 10px;
-                    background-color: blue;"
-                    >
-                </div>
-            </span>
-            <p>${Math.round(data[2])} %</p>
-        </div>
-        <div class="d-flex flex-row align-items-center">
-            <p>3</p>
-            <span style="width: 200px; height:10px; background-color:grey;">
-                <div
-                    style="width:${Math.round(data[3])}%;
-                    height: 10px;
-                    background-color: blue;"
-                    >
-                </div>
-            </span>
-            <p>${Math.round(data[3])} %</p>
-        </div>
-        <div class="d-flex flex-row align-items-center">
-            <p>4</p>
-            <span style="width: 200px; height:10px; background-color:grey;">
-                <div
-                    style="width:${Math.round(data[4])}%;
-                    height: 10px;
-                    background-color: blue;"
-                    >
-                </div>
-            </span>
-            <p>${Math.round(data[4])} %</p>
-        </div>
-        <div class="d-flex flex-row align-items-center">
-            <p>5</p>
-            <span style="width: 200px; height:10px; background-color:grey;">
-                <div
-                    style="width:${Math.round(data[5])}%;
-                    height: 10px;
-                    background-color: blue;"
-                    >
-                </div>
-            </span>
-            <p>${Math.round(data[5])} %</p>
-        </div>
-        <div class="d-flex flex-row align-items-center">
-            <p>6</p>
-            <span style="width: 200px; height:10px; background-color:grey;">
-                <div
-                    style="width:${Math.round(data[6])}%;
-                    height: 10px;
-                    background-color: blue;"
-                    >
-                </div>
-            </span>
-            <p>${Math.round(data[6])} %</p>
-        </div>
-        <div class="d-flex flex-row align-items-center">
-            <p>7</p>
-            <span style="width: 200px; height:10px; background-color:grey;">
-                <div
-                    style="width:${Math.round(data[7])}%;
-                    height: 10px;
-                    background-color: blue;"
-                    >
-                </div>
-            </span>
-            <p>${Math.round(data[7])} %</p>
-        </div>
-        <div class="d-flex flex-row align-items-center">
-            <p>8</p>
-            <span style="width: 200px; height:10px; background-color:grey;">
-                <div
-                    style="width:${Math.round(data[8])}%;
-                    height: 10px;
-                    background-color: blue;"
-                    >
-                </div>
-            </span>
-            <p>${Math.round(data[8])} %</p>
-        </div>
-        <div class="d-flex flex-row align-items-center">
-            <p>9</p>
-            <span style="width: 200px; height:10px; background-color:grey;">
-                <div
-                    style="width:${Math.round(data[9])}%;
-                    height: 10px;
-                    background-color: blue;"
-                    >
-                </div>
-            </span>
-            <p>${Math.round(data[9])} %</p>
+            <p class="ms-3" style="color:white;">${Math.round(data[i])}%</p>
         </div>
         `;
-}
-   
+    }
+}  
 function mousedown(message){
     console.log("clicked");
     console.log(message);
